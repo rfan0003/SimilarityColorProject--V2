@@ -1,0 +1,511 @@
+﻿<defaults >
+/ screencolor = (127,127,127) 
+</defaults>
+
+<include>
+/ file = "PictureAndText.iqx"
+/ file = "CircleLocation.iqx"
+/ file = "Instruction.iqx"
+</include>
+
+
+
+<values>
+/ y = 1px * display.getpixelsy(50, 1)
+/ x = 1px * display.getpixelsx(50, 1)
+/ F_size = 1px * display.getpixelsy(8,1)
+/ P_size = 1px * display.getpixelsy(20,1)
+/ F1_x = 0
+/ F1_y = 0
+/ F2_x = 0
+/ F2_y = 0
+/ P1_x = 0
+/ P1_y = 0
+/ P2_x = 0
+/ P2_y = 0
+/ radius_1 = 1px * display.getpixelsy(8,1)
+/ radius_2 = 1px * display.getpixelsy(30,1)
+/ radius_3 = 1px * display.getpixelsy(8,1)
+/ radius_4 = 1px * display.getpixelsy(30,1)
+/ angle_1 = 0
+/ angle_2 = 0
+/ angle_3 = 0
+/ angle_4 = 0
+
+/ Fixation_1_timeout = 0
+
+/ response = 0
+/ temp = 0
+/question_index = 0
+
+/mask_index = 0
+</values>
+
+
+
+*********************************************************************************************************************************
+*********************************************************************************************************************************
+													Formal Experiment
+*********************************************************************************************************************************
+*********************************************************************************************************************************
+<counter F1_angle>
+/ select = replace(0-360)
+</counter>
+<counter F2_angle>
+/ select = replace(90,180,270)
+</counter>
+
+<counter P1_angle>
+/ select = replace(0-360)
+</counter>
+<counter P2_angle>
+/ select = replace(90,180,270)
+</counter>
+
+<counter Fixation_1_time>
+/ select = noreplace(100,150,200)
+</counter>
+
+
+<trial Fixation_1>
+/ ontrialbegin = [
+	if (counter.Fixation_1_time.selectedvalue == 100){
+		values.Fixation_1_timeout = 100;
+	}else if(counter.Fixation_1_time.selectedvalue == 150){
+		values.Fixation_1_timeout = 150;
+	}else{
+		values.Fixation_1_timeout = 200;
+	}	
+]
+/ stimulusframes = [1 = cross]
+/ timeout = values.Fixation_1_timeout
+/ recorddata = false
+/ branch = [
+	trial.CirclePresent_4_circle
+]
+</trial>
+
+
+<trial CirclePresent_4_circle>
+/ stimulusframes = [1 = cross,F1,F2,P1,P2]
+/ timeout = 1000
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial fixation_2>
+/ ontrialbegin = [
+	if (counter.Fixation_1_time.selectedvalue == 100){
+		values.Fixation_1_timeout = 100;
+	}else if(counter.Fixation_1_time.selectedvalue == 150){
+		values.Fixation_1_timeout = 150;
+	}else{
+		values.Fixation_1_timeout = 200;
+	}	
+]
+/ stimulusframes = [1 = cross]
+/ timeout = values.Fixation_1_timeout
+/ recorddata = false
+/ branch = [
+	trial.CirclePresent
+]
+</trial>
+*****************************************************************************
+*****************************************************************************
+
+<counter circle_present_choose>
+/ select = noreplace(1-6)
+</counter>
+
+<trial CirclePresent>
+/ ontrialbegin = [
+values.question_index = counter.circle_present_choose.selectedvalue;
+	if(values.question_index == 1){
+		trial.CirclePresent.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent.insertstimulusframe(shape.F1, 1);
+		trial.CirclePresent.insertstimulusframe(shape.F2, 1);
+		
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F2,1);
+	}else if(values.question_index == 2){
+		trial.CirclePresent.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent.insertstimulusframe(shape.F1, 1);
+		trial.CirclePresent.insertstimulusframe(shape.P1, 1);
+
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P1,1);		
+	}else if(values.question_index == 3){
+		trial.CirclePresent.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent.insertstimulusframe(shape.F1, 1);
+		trial.CirclePresent.insertstimulusframe(shape.P2, 1);	
+	
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P2,1);	
+	}else if(values.question_index == 4){
+		trial.CirclePresent.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent.insertstimulusframe(shape.F2, 1);
+		trial.CirclePresent.insertstimulusframe(shape.P1, 1);	
+	
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F2,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P1,1);	
+	}else if(values.question_index == 5){
+		trial.CirclePresent.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent.insertstimulusframe(shape.F2, 1);
+		trial.CirclePresent.insertstimulusframe(shape.P2, 1);
+
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F2,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P2,1);		
+	}else{
+		trial.CirclePresent.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent.insertstimulusframe(shape.P1, 1);
+		trial.CirclePresent.insertstimulusframe(shape.P2, 1);
+
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P2,1);		
+	}
+]
+/ stimulusframes = []
+/ timeout = 2000
+/ ontrialend = [
+	trial.CirclePresent.clearstimulusframes();
+]
+/ branch = [
+	trial.mask_step
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial mask_step>
+/ timeout = 50
+/ ontrialbegin = [
+	values.mask_index = values.mask_index + 1;
+]
+/ branch = [
+	if(values.mask_index != 5){
+		trial.mask_step;
+	}else{
+		trial.fixation_3;
+	}
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<counter response_choose>
+/ select = noreplace(1-6)
+</counter>
+
+<trial fixation_3>
+/ ontrialbegin = [
+	values.mask_index = 0;
+	trial.mask_step.clearstimulusframes();
+]
+/ stimulusframes = [1 = cross]
+/ timeout = 500
+/ recorddata = false
+/ branch = [
+	if(values.question_index == 1){
+		trial.response_1
+	}else if(values.question_index == 2){
+		trial.response_2
+	}else if(values.question_index == 3){
+		trial.response_3
+	}else if(values.question_index == 4){
+		trial.response_4
+	}else if(values.question_index == 5){
+		trial.response_5
+	}else{
+		trial.response_6
+	}
+	
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial response_1>
+/ stimulusframes = [1 = cross,F1_response_black,F1_response_grey,F2_response_black,F2_response_grey]
+/ validresponse = (30,31,32,33,36,37,38,39)
+/ ontrialend = [
+	if(trial.response_1.response == 30){
+		values.response = -4;
+	}else if(trial.response_1.response == 31){
+		values.response = -3;
+	}else if(trial.response_1.response == 32){
+		values.response = -2;
+	}else if(trial.response_1.response == 33){
+		values.response = -1;
+	}else if(trial.response_1.response == 36){
+		values.response = 1;
+	}else if(trial.response_1.response == 37){
+		values.response = 2;
+	}else if(trial.response_1.response == 38){
+		values.response = 3;
+	}else{
+		values.response = 4;
+	}
+]
+/ branch = [
+	trial.feedback
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial response_2>
+/ stimulusframes = [1 = cross,F1_response_black,F1_response_grey,P1_response_black,P1_response_grey]
+/ validresponse = (30,31,32,33,36,37,38,39)
+/ ontrialend = [
+	if(trial.response_2.response == 30){
+		values.response = -4;
+	}else if(trial.response_2.response == 31){
+		values.response = -3;
+	}else if(trial.response_2.response == 32){
+		values.response = -2;
+	}else if(trial.response_2.response == 33){
+		values.response = -1;
+	}else if(trial.response_2.response == 36){
+		values.response = 1;
+	}else if(trial.response_2.response == 37){
+		values.response = 2;
+	}else if(trial.response_2.response == 38){
+		values.response = 3;
+	}else{
+		values.response = 4;
+	}
+]
+/ branch = [
+	trial.feedback
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial response_3>
+/ stimulusframes = [1 = cross,F1_response_black,F1_response_grey,P2_response_black,P2_response_grey]
+/ validresponse = (30,31,32,33,36,37,38,39)
+/ ontrialend = [
+	if(trial.response_3.response == 30){
+		values.response = -4;
+	}else if(trial.response_3.response == 31){
+		values.response = -3;
+	}else if(trial.response_3.response == 32){
+		values.response = -2;
+	}else if(trial.response_3.response == 33){
+		values.response = -1;
+	}else if(trial.response_3.response == 36){
+		values.response = 1;
+	}else if(trial.response_3.response == 37){
+		values.response = 2;
+	}else if(trial.response_3.response == 38){
+		values.response = 3;
+	}else{
+		values.response = 4;
+	}
+]
+/ branch = [
+	trial.feedback
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial response_4>
+/ stimulusframes = [1 = cross,F2_response_black,F2_response_grey,P1_response_black,P1_response_grey]
+/ validresponse = (30,31,32,33,36,37,38,39)
+/ ontrialend = [
+	if(trial.response_4.response == 30){
+		values.response = -4;
+	}else if(trial.response_4.response == 31){
+		values.response = -3;
+	}else if(trial.response_4.response == 32){
+		values.response = -2;
+	}else if(trial.response_4.response == 33){
+		values.response = -1;
+	}else if(trial.response_4.response == 36){
+		values.response = 1;
+	}else if(trial.response_4.response == 37){
+		values.response = 2;
+	}else if(trial.response_4.response == 38){
+		values.response = 3;
+	}else{
+		values.response = 4;
+	}
+]
+/ branch = [
+	trial.feedback
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial response_5>
+/ stimulusframes = [1 = cross,F2_response_black,F2_response_grey,P2_response_black,P2_response_grey]
+/ validresponse = (30,31,32,33,36,37,38,39)
+/ ontrialend = [
+	if(trial.response_5.response == 30){
+		values.response = -4;
+	}else if(trial.response_5.response == 31){
+		values.response = -3;
+	}else if(trial.response_5.response == 32){
+		values.response = -2;
+	}else if(trial.response_5.response == 33){
+		values.response = -1;
+	}else if(trial.response_5.response == 36){
+		values.response = 1;
+	}else if(trial.response_5.response == 37){
+		values.response = 2;
+	}else if(trial.response_5.response == 38){
+		values.response = 3;
+	}else{
+		values.response = 4;
+	}
+]
+/ branch = [
+	trial.feedback
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial response_6>
+/ stimulusframes = [1 = cross,P1_response_black,P1_response_grey,P2_response_black,P2_response_grey]
+/ validresponse = (30,31,32,33,36,37,38,39)
+/ ontrialend = [
+	if(trial.response_6.response == 30){
+		values.response = -4;
+	}else if(trial.response_6.response == 31){
+		values.response = -3;
+	}else if(trial.response_6.response == 32){
+		values.response = -2;
+	}else if(trial.response_6.response == 33){
+		values.response = -1;
+	}else if(trial.response_6.response == 36){
+		values.response = 1;
+	}else if(trial.response_6.response == 37){
+		values.response = 2;
+	}else if(trial.response_6.response == 38){
+		values.response = 3;
+	}else{
+		values.response = 4;
+	}
+]
+/ branch = [
+	trial.feedback
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<trial feedback>
+/ ontrialbegin = [
+	if (values.response == -4){
+		values.temp = 1;
+		text.feedback_present.insertitem(text.feedback_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.feedback_present,1);
+		text.you_press_present.insertitem(text.you_press_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.you_press_present,1);
+	}else if(values.response == -3){
+		values.temp = 2;
+		text.feedback_present.insertitem(text.feedback_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.feedback_present,1);
+		text.you_press_present.insertitem(text.you_press_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.you_press_present,1);
+	}else if(values.response == -2){
+		values.temp = 3;
+		text.feedback_present.insertitem(text.feedback_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.feedback_present,1);
+		text.you_press_present.insertitem(text.you_press_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.you_press_present,1);
+	}else if(values.response == -1){
+		values.temp = 4;
+		text.feedback_present.insertitem(text.feedback_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.feedback_present,1);
+		text.you_press_present.insertitem(text.you_press_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.you_press_present,1);
+	}else if(values.response == 1){
+		values.temp = 5;
+		text.feedback_present.insertitem(text.feedback_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.feedback_present,1);
+		text.you_press_present.insertitem(text.you_press_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.you_press_present,1);
+	}else if(values.response == 2){
+		values.temp = 6;
+		text.feedback_present.insertitem(text.feedback_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.feedback_present,1);
+		text.you_press_present.insertitem(text.you_press_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.you_press_present,1);
+	}else if(values.response == 3){
+		values.temp = 7;
+		text.feedback_present.insertitem(text.feedback_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.feedback_present,1);
+		text.you_press_present.insertitem(text.you_press_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.you_press_present,1);
+	}else{
+		values.temp = 8;
+		text.feedback_present.insertitem(text.feedback_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.feedback_present,1);
+		text.you_press_present.insertitem(text.you_press_resource.item(values.temp),1);
+		trial.feedback.insertstimulusframe(text.you_press_present,1);
+	}
+]
+/ stimulusframes = []
+/ timeout = 1000
+/ ontrialend = [
+	trial.feedback.clearstimulusframes();
+	text.feedback_present.clearitems();
+]
+</trial>
+
+*****************************************************************************
+*****************************************************************************
+
+<block Instruction>
+/ trials = [1 = Instruction_1]
+</block>
+
+
+
+<block test>
+/ onblockbegin = [
+	values.angle_1 = counter.F1_angle.selectedvalue;
+	values.angle_2 = counter.P1_angle.selectedvalue;
+	values.angle_3 = values.angle_1 + counter.F2_angle.selectedvalue;
+	values.angle_4 = values.angle_2 + counter.P2_angle.selectedvalue;
+	values.F1_x = expressions.a_1;
+	values.F1_y = expressions.b_1;
+	values.F2_x = expressions.a_3;
+	values.F2_y = expressions.b_3;	
+	values.P1_x = expressions.a_2;
+	values.P1_y = expressions.b_2;
+	values.P2_x = expressions.a_4;
+	values.P2_y = expressions.b_4;
+]
+/ trials = [1 = Fixation_1; 2-7 = fixation_2]
+</block>
+
+<expt test>
+/ preinstructions = (start)
+/ postinstructions = (end)
+/ blocks = [1 = Instruction; 2-3 = test]
+</expt>
+
+
+

@@ -1,0 +1,56 @@
+﻿<page start>
+^^ Welcome to the experiment !!
+</page>
+
+<page end>
+^^Thank you for your participant !!
+</page>
+
+
+<instruct>
+/ fontstyle = ("8514oem", 3.29%, false, false, false, false, 5, 1)
+/ txcolor = black
+/ screencolor = (127,127,127)
+/ nextkey = (57)
+</instruct>
+
+********************************************************************
+********************************************************************
+
+Next Button: Space Button
+<text Next_button>
+/ items = ("Press SPACE BUTTON to continue")
+/ position = (80%,85%)
+/ fontstyle = ("Arial", 2.8%, true)
+/ txbgcolor = (127,127,127)
+</text>
+
+********************************************************************
+********************************************************************
+
+Operation Instruction Page 1:
+<text Instruction_Page_1>
+/ items = ("At the start of the experiment, 4 circles will flash out quickly
+2 of them are small and the other two are big
+These 4 circles can appear in their own position and has individal color
+After a very short time, they will be masked out")
+/ hposition = 50%
+/ vposition = 70%
+/ fontstyle = ("Arial", 3%, true)
+/ txbgcolor = (127,127,127)
+</text>
+
+<video Instruction_Page_1_gif>
+/ items = ("InstructionPage1.gif")
+/ hposition = 50%
+/ vposition = 30%
+/ loop = true
+/ size = (40%,40%)
+</video>
+
+<trial Instruction_1>
+/ stimulusframes = [1 = Instruction_Page_1,Instruction_Page_1_gif,Next_button]
+/ validresponse = (57)
+</trial>
+********************************************************************
+********************************************************************
