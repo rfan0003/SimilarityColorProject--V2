@@ -6,6 +6,7 @@
 / file = "PictureAndText.iqx"
 / file = "CircleLocation.iqx"
 / file = "Instruction.iqx"
+/ file = "PracticeTrial.iqx"
 </include>
 
 
@@ -39,6 +40,8 @@
 / circle_present = 0
 / circle_combination = 0
 /mask_index = 0
+
+/ FormalOrPrac = 0
 </values>
 
 
@@ -76,7 +79,7 @@
 	}else{
 		values.Fixation_1_timeout = 200;
 	}
-
+	values.FormalOrPrac = values.FormalOrPrac + 1;
 	values.angle_1 = counter.F1_angle.selectedvalue;
 	values.angle_2 = counter.P1_angle.selectedvalue;
 	values.angle_3 = values.angle_1 + counter.F2_angle.selectedvalue;
@@ -94,7 +97,11 @@
 / timeout = values.Fixation_1_timeout
 / recorddata = false
 / branch = [
-	trial.CirclePresent
+	if(values.FormalOrPrac <= 6){
+		trial.CirclePresent_prac
+	}else{
+		trial.CirclePresent
+	}
 ]
 </trial>
 

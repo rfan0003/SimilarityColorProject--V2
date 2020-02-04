@@ -1,0 +1,167 @@
+﻿*********************************************************************************************************************************
+*********************************************************************************************************************************
+Practice Experiment: 1. It has 6 trials in total
+					 2. 6 trials consist of Same Color case and Different Color case. Each case has 3 group: PP,FF,FP
+												    
+*********************************************************************************************************************************
+*********************************************************************************************************************************
+1 = FF same; 2 = PP same; 3 = FP same; 4 = FF different; 5 = PP different; 6 = FP different
+<values>
+/ present_order_prac = 0
+/ F1_R_prac = 0
+/ F1_G_prac = 0
+/ F1_B_prac = 0
+
+/ F2_R_prac = 0
+/ F2_G_prac = 0
+/ F2_B_prac = 0
+
+/ P1_R_prac = 0
+/ P1_G_prac = 0
+/ P1_B_prac = 0
+
+/ P2_R_prac = 0
+/ P2_G_prac = 0
+/ P2_B_prac = 0
+</values>
+
+<counter prac>
+/ select = noreplace(1-6)
+</counter>
+
+<text prac_hint>
+/ items = ("Practice")
+/ color = yellow
+/ txbgcolor = (127, 127, 127)
+/ position = (50%,10%)
+</text>
+
+<trial CirclePresent_prac>
+/ ontrialbegin = [
+	values.present_order_prac = counter.prac.selectedvalue;
+	if(values.present_order_prac == 1){
+		values.F1_R_prac = 255;
+		values.F1_G_prac = 255;
+		values.F1_B_prac = 255;
+		values.F2_R_prac = 255;
+		values.F2_G_prac = 255;
+		values.F2_B_prac = 255;
+		
+		trial.CirclePresent_prac.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.F1_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.F2_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(text.prac_hint,1);
+		
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F2,1);
+		
+		values.circle_present = 1;
+	}else if(values.present_order_prac == 2){
+		values.P1_R_prac = 255;
+		values.P1_G_prac = 0;
+		values.P1_B_prac = 0;
+		values.P2_R_prac = 255;
+		values.P2_G_prac = 0;
+		values.P2_B_prac = 0;
+		
+		trial.CirclePresent_prac.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.P1_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.P2_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(text.prac_hint,1);
+		
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P2,1);
+			
+		values.circle_present = 2;
+	}else if(values.present_order_prac == 3){
+		values.F1_R_prac = 0;
+		values.F1_G_prac = 255;
+		values.F1_B_prac = 0;
+		values.P2_R_prac = 0;
+		values.P2_G_prac = 255;
+		values.P2_B_prac = 0;
+		
+		trial.CirclePresent_prac.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.F1_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.P2_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(text.prac_hint,1);
+		
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P2,1);
+			
+		values.circle_present = 3;
+		values.circle_combination = 2;
+	}else if(values.present_order_prac == 4){
+		values.F1_R_prac = 255;
+		values.F1_G_prac = 0;
+		values.F1_B_prac = 0;
+		values.F2_R_prac = 0;
+		values.F2_G_prac = 0;
+		values.F2_B_prac = 255;
+		
+		trial.CirclePresent_prac.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.F1_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.F2_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(text.prac_hint,1);
+		
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F2,1);
+		
+		values.circle_present = 1;		
+	}else if(values.present_order_prac == 5){
+		values.P1_R_prac = 255;
+		values.P1_G_prac = 255;
+		values.P1_B_prac = 255;
+		values.P2_R_prac = 0;
+		values.P2_G_prac = 0;
+		values.P2_B_prac = 255;
+		
+		trial.CirclePresent_prac.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.P1_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.P2_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(text.prac_hint,1);
+		
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P1,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P2,1);	
+	
+		values.circle_present = 2;
+	}else{
+		values.F2_R_prac = 0;
+		values.F2_G_prac = 255;
+		values.F2_B_prac = 0;
+		values.P1_R_prac = 255;
+		values.P1_G_prac = 0;
+		values.P1_B_prac = 0;
+		trial.CirclePresent_prac.insertstimulusframe(text.cross, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.F2_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(shape.P1_prac, 1);
+		trial.CirclePresent_prac.insertstimulusframe(text.prac_hint,1);
+		
+		trial.mask_step.insertstimulusframe(text.cross,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_F2,1);
+		trial.mask_step.insertstimulusframe(picture.Mask_Mondrain_P1,1);
+
+		values.circle_present = 3;
+		values.circle_combination = 3;		
+	}
+]
+/ stimulusframes = []
+/ timeout = 2000
+/ ontrialend = [
+	trial.CirclePresent_prac.clearstimulusframes();
+]
+/ branch = [
+	trial.mask_step
+]
+</trial>
+
+
+
+
+
+
