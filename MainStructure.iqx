@@ -504,7 +504,7 @@ values.question_index = counter.circle_present_choose.selectedvalue;
 <expt test>
 / preinstructions = (start)
 / postinstructions = (end)
-/ blocks = [1 = Instruction; 2-3 = test]
+/ blocks = [1 = Instruction; 2-5 = test]
 </expt>
 
 
